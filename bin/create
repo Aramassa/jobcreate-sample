@@ -1,0 +1,17 @@
+#!/home/gitpod/.rvm/rubies/ruby-2.7.3/bin/ruby
+
+require "yaml"
+require "fileutils"
+
+case ARGV[0]
+  when "rst"
+    yml = YAML.load_file("tpl/rst.yml")
+    FileUtils.mkdir_p('oncejob')
+    yml["test"]["bye"] = STDIN.readlines.join("\n")
+    File.write("oncejob/test.yml", yml.to_yaml)
+  else
+    puts "対象システムの指定がありません \n"
+    exit 1
+end
+
+exit 0
